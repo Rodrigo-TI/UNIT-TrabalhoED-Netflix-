@@ -120,6 +120,31 @@ public class Main {
                         }
                         break;
                     case 3:
+                        System.out.print("\nNome do título que deseja avaliar : ");
+                        String nomeTituloAvaliar = s.nextLine();
+                        for (int i = 0; i < n.getListaTitulos().size(); i++) {
+                            if (n.getListaTitulos().get(i).getNome().equals(nomeTituloAvaliar)) {
+                                System.out.print("Nota de avaliação : ");
+                                int notaAvaliacao = Integer.parseInt(s.nextLine());
+                                if (n.getListaTitulos().get(i).getAvaliacao() > 0) {
+                                    n.getListaTitulos().get(i).setAvaliacao((n.getListaTitulos().get(i).getAvaliacao() + notaAvaliacao)/2);
+                                } else if (n.getListaTitulos().get(i).getAvaliacao() == 0) {
+                                    n.getListaTitulos().get(i).setAvaliacao(notaAvaliacao);
+                                }
+                            }
+                            break;
+                        }
+                        break;
+                    case 4:
+                        System.out.print("\nNome do título que deseja remover : ");
+                        String nomeTituloRemover = s.nextLine();
+                        int i;
+                        for (i = 0; i < n.getListaTitulos().size(); i++) {
+                            if (n.getListaTitulos().get(i).getNome().equals(nomeTituloRemover)) {
+                                n.getListaTitulos().remove(n.getListaTitulos().get(i));
+                                
+                            }
+                        }
                         break;
                     default:
                         break;

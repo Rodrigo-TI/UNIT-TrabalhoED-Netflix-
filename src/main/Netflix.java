@@ -1,4 +1,5 @@
 package main;
+import classes.pessoas.Profissional;
 import classes.titulo.Categoria;
 import classes.titulo.Titulo;
 import java.util.ArrayList;
@@ -98,6 +99,32 @@ public class Netflix {
                 break;
         }
         return array;
+    }
+    public Profissional buscarProfissional(String nome) {
+        Profissional p = null;
+        boolean encontrado = false;
+        for (int i = 0; i < this.listaTitulos.size(); i++) {
+            for (int j = 0; j < this.listaTitulos.get(i).getListaDiretores().size(); j++) {
+                if (this.listaTitulos.get(i).getListaDiretores().get(j).getNome().equals(nome)) {
+                    p = this.listaTitulos.get(i).getListaDiretores().get(j);
+                    encontrado = true;
+                    i = this.listaTitulos.size();
+                    break;
+                }
+            }
+        }
+        if (encontrado == false) {
+            for (int i = 0; i < this.listaTitulos.size(); i++) {
+                for (int j = 0; j < this.listaTitulos.get(i).getListaAtores().size(); j++) {
+                    if (this.listaTitulos.get(i).getListaAtores().get(j).getNome().equals(nome)) {
+                        p = this.listaTitulos.get(i).getListaDiretores().get(j);
+                        i = this.listaTitulos.size();
+                        break;
+                    }
+                }
+            }
+        }
+        return p;
     }
     
 }

@@ -15,13 +15,13 @@ public class Titulo {
     private ArrayList<Profissional> listaDiretores;
     
     // CONSTRUTOR
-    public Titulo(String nome, String descricao, int classificacaoIndicativa, int anoLancamento, int duracao) {
+    public Titulo(String nome, String descricao, int classificacaoIndicativa, int anoLancamento, int duracao, int avaliacao) {
         this.nome = nome;
         this.descricao = descricao;
         this.classificacaoIndicativa = classificacaoIndicativa;
         this.anoLancamento = anoLancamento;
         this.duracao = duracao;
-        this.avaliacao = 0;
+        this.avaliacao = avaliacao;
         this.categorias = new ArrayList();
         this.subCategorias = new ArrayList();
         this.listaAtores = new ArrayList();

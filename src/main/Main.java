@@ -1,16 +1,13 @@
 package main;
-
 import classes.pessoas.Profissional;
+import classes.titulo.Categoria;
 import classes.titulo.Titulo;
 import java.util.Scanner;
-
 public class Main {
-
     // MENUS
     static void menu() {
         System.out.println("1 - Cadastrar título");
         System.out.println("2 - Buscar título");
-        System.out.println("3 - Avaliar título");
         System.out.println("4 - Remover título");
         System.out.println("5 - Cadastrar categoria");
         System.out.println("6 - Buscar categoria");
@@ -27,13 +24,12 @@ public class Main {
         System.out.println("0 - Finalizar programa");
         System.out.println("---------------------------------------------");
     }
-
     public static void main(String[] args) {
         // PREPARAÇÃO
         Scanner s = new Scanner(System.in);
         Netflix n = new Netflix();
 
-        while (true) {
+        while(true) {
             try {
                 menu();
                 System.out.print("Digite sua escolha : ");
@@ -60,8 +56,67 @@ public class Main {
                         int duracao = Integer.parseInt(s.nextLine());
                         System.out.print("Avaliação : ");
                         int avaliacao = Integer.parseInt(s.nextLine());
-                        Titulo t = new Titulo(nomeTitulo, descricao, classfInd, anoLanc, duracao, avaliacao);
-                        n.getListaTitulos().add(t);
+                        System.out.print("Quantidade de categorias : ");
+                        int qtdCat = Integer.parseInt(s.nextLine());
+                        Titulo t = new Titulo(nomeTitulo,descricao,classfInd,anoLanc,duracao,avaliacao);
+                        for (int i = 0; i < qtdCat; i++) {
+                            System.out.print("\n" + (i+1) + "ª categoria : ");
+                            String nomeCategoria = s.nextLine();
+                            for (int j = 0; j < n.getListaCategorias().size(); j++) {
+                                if (n.getListaCategorias().get(j).getNome().equals(nomeCategoria)) {
+                                    t.getCategorias().add(n.getListaCategorias().get(j));
+                                    switch (avaliacao) {
+                                        case 1:
+                                            n.getListaCategorias().get(j).getListaTitulosNota1().add(t);
+                                            break;
+                                        case 2:
+                                            n.getListaCategorias().get(j).getListaTitulosNota2().add(t);
+                                            break;
+                                        case 3:
+                                            n.getListaCategorias().get(j).getListaTitulosNota3().add(t);
+                                            break;
+                                        case 4:
+                                            n.getListaCategorias().get(j).getListaTitulosNota4().add(t);
+                                            break;
+                                        case 5:
+                                            n.getListaCategorias().get(j).getListaTitulosNota5().add(t);
+                                            break;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        System.out.print("Quantidade de sub-categorias : ");
+                        int qtdSubCat = Integer.parseInt(s.nextLine());
+                        for (int i = 0; i < qtdSubCat; i++) {
+                            System.out.print("\n" + (i+1) + "ª sub-categoria : ");
+                            String nomeSubCategoria = s.nextLine();
+                            for (int j = 0; j < n.getListaSubCategorias().size(); j++) {
+                                if (n.getListaSubCategorias().get(j).getNome().equals(nomeSubCategoria)) {
+                                    t.getSubCategorias().add(n.getListaCategorias().get(j));
+                                    switch (avaliacao) {
+                                        case 1:
+                                            n.getListaCategorias().get(j).getListaTitulosNota1().add(t);
+                                            break;
+                                        case 2:
+                                            n.getListaCategorias().get(j).getListaTitulosNota2().add(t);
+                                            break;
+                                        case 3:
+                                            n.getListaCategorias().get(j).getListaTitulosNota3().add(t);
+                                            break;
+                                        case 4:
+                                            n.getListaCategorias().get(j).getListaTitulosNota4().add(t);
+                                            break;
+                                        case 5:
+                                            n.getListaCategorias().get(j).getListaTitulosNota5().add(t);
+                                            break;
+                                    }
+                                    n.getListaCategorias().get(j).getListaTitulos().add(t);
+                                    break;
+                                }
+                            }
+                        }
                         break;
                     case 2:
                         System.out.print("\nNome do título que deseja buscar : ");
@@ -77,7 +132,7 @@ public class Main {
                                 System.out.print("Categorias : ");
                                 if (n.getListaTitulos().get(i).getCategorias().size() > 0) {
                                     for (int j = 0; j < n.getListaTitulos().get(i).getCategorias().size(); j++) {
-                                        if (j == n.getListaTitulos().get(i).getCategorias().size() - 1) {
+                                        if (j == n.getListaTitulos().get(i).getCategorias().size()-1) {
                                             System.out.print(n.getListaTitulos().get(i).getCategorias().get(j));
                                         } else {
                                             System.out.print(n.getListaTitulos().get(i).getCategorias().get(j) + ", ");
@@ -89,7 +144,7 @@ public class Main {
                                 System.out.print("Sub-categorias : ");
                                 if (n.getListaTitulos().get(i).getSubCategorias().size() > 0) {
                                     for (int j = 0; j < n.getListaTitulos().get(i).getSubCategorias().size(); j++) {
-                                        if (j == n.getListaTitulos().get(i).getSubCategorias().size() - 1) {
+                                        if (j == n.getListaTitulos().get(i).getSubCategorias().size()-1) {
                                             System.out.print(n.getListaTitulos().get(i).getSubCategorias().get(j));
                                         } else {
                                             System.out.print(n.getListaTitulos().get(i).getSubCategorias().get(j) + ", ");
@@ -101,7 +156,7 @@ public class Main {
                                 System.out.print("Lista de diretores : ");
                                 if (n.getListaTitulos().get(i).getListaDiretores().size() > 0) {
                                     for (int j = 0; j < n.getListaTitulos().get(i).getListaDiretores().size(); j++) {
-                                        if (j == n.getListaTitulos().get(i).getListaDiretores().size() - 1) {
+                                        if (j == n.getListaTitulos().get(i).getListaDiretores().size()-1) {
                                             System.out.print(n.getListaTitulos().get(i).getListaDiretores().get(j));
                                         } else {
                                             System.out.print(n.getListaTitulos().get(i).getListaDiretores().get(j) + ", ");
@@ -113,7 +168,7 @@ public class Main {
                                 System.out.print("Lista de atores : ");
                                 if (n.getListaTitulos().get(i).getListaAtores().size() > 0) {
                                     for (int j = 0; j < n.getListaTitulos().get(i).getListaAtores().size(); j++) {
-                                        if (j == n.getListaTitulos().get(i).getListaAtores().size() - 1) {
+                                        if (j == n.getListaTitulos().get(i).getListaAtores().size()-1) {
                                             System.out.print(n.getListaTitulos().get(i).getListaAtores().get(j));
                                         } else {
                                             System.out.print(n.getListaTitulos().get(i).getListaAtores().get(j) + ", ");
@@ -126,31 +181,47 @@ public class Main {
                             }
                         }
                         break;
-                    case 3:
-                        System.out.print("\nNome do título que deseja avaliar : ");
-                        String nomeTituloAvaliar = s.nextLine();
-                        for (int i = 0; i < n.getListaTitulos().size(); i++) {
-                            if (n.getListaTitulos().get(i).getNome().equals(nomeTituloAvaliar)) {
-                                System.out.print("Nota de avaliação : ");
-                                int notaAvaliacao = Integer.parseInt(s.nextLine());
-                                if (n.getListaTitulos().get(i).getAvaliacao() > 0) {
-                                    n.getListaTitulos().get(i).setAvaliacao((n.getListaTitulos().get(i).getAvaliacao() + notaAvaliacao) / 2);
-                                } else if (n.getListaTitulos().get(i).getAvaliacao() == 0) {
-                                    n.getListaTitulos().get(i).setAvaliacao(notaAvaliacao);
-                                }
-                            }
-                            break;
-                        }
-                        break;
                     case 4:
                         System.out.print("\nNome do título que deseja remover : ");
                         String nomeTituloRemover = s.nextLine();
                         for (int i = 0; i < n.getListaTitulos().size(); i++) {
                             if (n.getListaTitulos().get(i).getNome().equals(nomeTituloRemover)) {
-                                n.getListaTitulos().remove(n.getListaTitulos().get(i));
-
+                                for (int j = 0; j < n.getListaTitulos().get(i).getListaDiretores().size(); j++) {
+                                    for (int k = 0; k < n.getListaTitulos().get(i).getListaDiretores().get(j).getTitulosQueParticipou().size(); k++) {
+                                        if (n.getListaTitulos().get(i).getListaDiretores().get(j).getTitulosQueParticipou().get(k).getNome().equals(nomeTituloRemover)) {
+                                            n.getListaTitulos().get(i).getListaDiretores().get(j).getTitulosQueParticipou().remove(n.getListaTitulos().get(i).getListaDiretores().get(j).getTitulosQueParticipou().get(k));
+                                        }
+                                    }
+                                }
+                                for (int j = 0; j < n.getListaTitulos().get(i).getListaAtores().size(); j++) {
+                                    for (int k = 0; k < n.getListaTitulos().get(i).getListaAtores().get(j).getTitulosQueParticipou().size(); k++) {
+                                        if (n.getListaTitulos().get(i).getListaAtores().get(j).getTitulosQueParticipou().get(k).getNome().equals(nomeTituloRemover)) {
+                                            n.getListaTitulos().get(i).getListaAtores().get(j).getTitulosQueParticipou().remove(n.getListaTitulos().get(i).getListaDiretores().get(j).getTitulosQueParticipou().get(k));
+                                        }
+                                    }
+                                }
+                                for (int j = 0; j < n.getListaCategorias().size(); j++) {
+                                    if (n.getListaCategorias().get(j).getNome().equals(nomeTituloRemover)) {
+                                        n.getListaCategorias().remove(n.getListaCategorias().get(j));
+                                        break;
+                                    }
+                                }
+                                for (int j = 0; j < n.getListaSubCategorias().size(); j++) {
+                                    if (n.getListaSubCategorias().get(j).getNome().equals(nomeTituloRemover)) {
+                                        n.getListaSubCategorias().remove(n.getListaSubCategorias().get(j));
+                                        break;
+                                    }
+                                }
                             }
+                            n.getListaTitulos().remove(n.getListaTitulos().get(i));
+                            break;
                         }
+                        break;
+                    case 5:
+                        System.out.print("\nNome da categoria que deseja cadastrar : ");
+                        String nomeCatCadastrar = s.nextLine();
+                        Categoria c = new Categoria(nomeCatCadastrar);
+                        n.getListaCategorias().add(c);
                         break;
                     case 9:
                         if (n.getListaSubCategorias().isEmpty()) {

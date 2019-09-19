@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Categoria {
     // ATRIBUTOS
     private String nome;
+    private ArrayList<Titulo> listaTitulos;
     private ArrayList<Titulo> listaTitulosNota1;
     private ArrayList<Titulo> listaTitulosNota2;
     private ArrayList<Titulo> listaTitulosNota3;
@@ -12,6 +13,7 @@ public class Categoria {
     // CONSTRUTOR
     public Categoria(String nome) {
         this.nome = nome;
+        this.listaTitulos = new ArrayList();
         this.listaTitulosNota1 = new ArrayList();
         this.listaTitulosNota2 = new ArrayList();
         this.listaTitulosNota3 = new ArrayList();
@@ -25,6 +27,15 @@ public class Categoria {
     }
     public void setNome(String nome) {
         this.nome = nome;
+        
+    }
+
+    public ArrayList<Titulo> getListaTitulos() {
+        return listaTitulos;
+    }
+
+    public void setListaTitulos(ArrayList<Titulo> listaTitulos) {
+        this.listaTitulos = listaTitulos;
     }
     public ArrayList<Titulo> getListaTitulosNota1() {
         return listaTitulosNota1;

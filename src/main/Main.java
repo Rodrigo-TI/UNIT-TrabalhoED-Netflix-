@@ -1,5 +1,6 @@
 package main;
 import classes.titulo.Titulo;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     // MENUS
@@ -120,6 +121,41 @@ public class Main {
                         }
                         break;
                     case 3:
+                        break;
+                    case 9:
+                        if(n.getListaSubCategorias().isEmpty()){
+                            System.out.println("Nenhuma SubCategoria cadastrada até o momento!");
+                        }else{
+                            System.out.println("Digite o nome da SubCategoria: ");
+                            String subCat = s.nextLine();
+                            for(int i = 0; i < n.getListaSubCategorias().size(); i++){
+                                if(n.getListaSubCategorias().get(i).getNome().equals(subCat)){
+                                    for (int j = 0; j < n.getListaSubCategorias().get(i).getListaTitulos().size(); j++) {
+                                        System.out.println(n.getListaSubCategorias().get(i).getListaTitulos().get(j).getNome());
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case 10:
+                        if(n.getListaSubCategorias().isEmpty()){
+                            System.out.println("Nenhuma SubCategoria cadastrada até o momento!");
+                        }else{
+                            System.out.println("Digite a SubCategoria a ser removida: ");
+                            String subCat = s.nextLine();
+                            for (int i = 0; i < n.getListaSubCategorias().size(); i++) {
+                                if(n.getListaSubCategorias().get(i).getNome().equals(subCat)){
+                                    n.getListaSubCategorias().remove(n.getListaSubCategorias().get(i));
+                                }
+                            }
+                            for (int i = 0; i < n.getListaTitulos().size(); i++) {
+                                for (int j = 0; j < n.getListaTitulos().get(i).getSubCategorias().size(); j++) {
+                                    if(n.getListaTitulos().get(i).getSubCategorias().get(j).getNome().equals(subCat)){
+                                        n.getListaTitulos().get(i).getSubCategorias().remove(n.getListaTitulos().get(i).getSubCategorias().get(j));
+                                    }
+                                }
+                            }
+                        }
                         break;
                     default:
                         break;
